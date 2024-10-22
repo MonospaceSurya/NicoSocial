@@ -1,6 +1,8 @@
 
 # NicoSocial
 
+[Project Demo Video](https://github.com/user-attachments/assets/ea0c4e57-67ff-4114-8adb-49750e199533)
+
 **NicoSocial** is a social platform designed to make socializing easier, fun, and rewarding by encouraging participation in personalized activities. It connects users through common interests and helps them overcome the initial hurdles of socializing by intelligently recommending events and activities that suit their preferences and social strengths.
 
 The app aims to combat loneliness and improve social interactions using technology, leveraging AI to suggest tailored events and create meaningful connections. 
