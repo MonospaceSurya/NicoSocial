@@ -53,8 +53,18 @@ The FastAPI backend is integrated to provide event similarity scoring, using AI 
 ## Screenshots & Demo
 
 - **FastAPI**: Backend server handling similarity logic and event matchmaking.
-- **HTML Demo**: A simple web form demonstrating how event matchmaking works using Cosine Similarity and the Gemini API.
-- **Swift App**: Screenshots of the iOS app showing the event map, calendar, and full events page.
+  <p align="center">
+  <img src="fastapi.png" alt="W2W">
+</p> 
+   video: https://drive.google.com/file/d/1KM_aK7JpsRAc-KzHxPz0866p7gqFmUAX/view?usp=sharing
+
+- HTML Demo: A simple web form demonstrating how event matchmaking works using Cosine Similarity and the Gemini API.
+<p align="center">
+  <img src="web.png" alt="W2W">
+</p> 
+video: https://drive.google.com/file/d/1CipPKYFsTLHLiHmye-UZ9Z67ePhqky8p/view?usp=sharing
+
+- Swift App: Screenshots of the iOS app showing the event map, calendar, and full events page.
 
 ## Tech Stack
 
@@ -64,7 +74,7 @@ The FastAPI backend is integrated to provide event similarity scoring, using AI 
   
 - **Backend**:
   - **FastAPI**: Python framework used for handling API requests, event matchmaking logic, and communicating with the Gemini API.
-  
+
 - **Database**:
   - **SQLite/PostgreSQL**: For storing user profiles, events, and matchmaking data.
 
@@ -74,7 +84,6 @@ The FastAPI backend is integrated to provide event similarity scoring, using AI 
 - **Xcode**: To run the Swift app on iOS.
 - **Python**: Version 3.7+ for the FastAPI backend.
 - **FastAPI**: Backend framework to run the event matchmaking logic.
-- **SQLite/PostgreSQL**: For database management.
 
 ### Steps:
 
