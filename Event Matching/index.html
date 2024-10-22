@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Matching Nico App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+        }
+        .profile-form {
+            margin-bottom: 30px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .profile-form label {
+            display: block;
+            margin-top: 10px;
+            color: #37474f;
+            font-weight: 500;
+        }
+        .profile-form input, .profile-form select, .profile-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        .profile-form input:focus, .profile-form select:focus, .profile-form textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            box-shadow: 0 0 0 2px rgba(26,35,126,0.1);
+        }
+        .profile-form button {
+            background-color: #1a237e;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .profile-form button:hover {
+            background-color: #283593;
+        }
+        #eventResults {
+            margin-top: 30px;
+        }
+        .event-item {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .event-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .event-item h3 {
+            color: #1a237e;
+            margin-top: 0;
+        }
+        .match-score {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .match-score.high {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .match-score.medium {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+        .match-score.low {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .tags-container {
+            margin-top: 10px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-radius: 16px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1a237e;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .join-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .join-button:hover {
+            background-color: #43a047;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Matching Nico App</h1>
+        
+        <div class="profile-form">
+            <h2>Your Profile</h2>
+            <form id="userProfileForm">
+                <div class="form-grid">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" required>
+                        
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" required>
+                        
+                        <label for="cuisinePreferences">Cuisine Preferences:</label>
+                        <input type="text" id="cuisinePreferences" placeholder="Italian, Japanese, Mexican">
+                    </div>
+                    <div>
+                        <label for="interests">Interests:</label>
+                        <input type="text" id="interests" placeholder="Photography, Yoga, Cooking">
+                        
+                        <label for="socialStyle">Social Style:</label>
+                        <select id="socialStyle">
+                            <option value="Introvert">Introvert</option>
+                            <option value="Extrovert">Extrovert</option>
+                            <option value="Ambivert">Ambivert</option>
+                        </select>
+                        
+                        <label for="freeTime">Available Times:</label>
+                        <input type="text" id="freeTime" placeholder="Weekday Evenings, Weekend Afternoons">
+                        
+                        <label for="personalityTraits">Personality Traits:</label>
+                        <input type="text" id="personalityTraits" placeholder="Creative, Curious, Analytical">
+                    </div>
+                </div>
+                
+                <label for="goals">Personal Goals:</label>
+                <textarea id="goals" rows="3" placeholder="Improve photography skills, Meet new people, Try new cuisines"></textarea>
+                
+                <button type="submit">Find Your Perfect Events</button>
+            </form>
+        </div>
+        
+        <div id="eventResults"></div>
+    </div>
+
+    <script>
+        // Enhanced events data with more detailed attributes and attendee profiles
+        const events = [
+            {
+                id: "event001",
+                name: "Sunset Photography Workshop",
+                type: "Photography",
+                cuisine: null,
+                time: { day: "Saturday", startTime: "17:00", endTime: "20:00" },
+                location: "Central Park, New York City",
+                socialLevel: "Small group (5-10 people)",
+                description: "Capture the golden hour with expert guidance. All skill levels welcome.",
+                tags: ["creative", "outdoors", "skill-building", "photography", "nature"],
+                skillLevel: "beginner-friendly",
+                pacing: "relaxed",
+                interactionLevel: "moderate",
+                environmentType: "outdoor",
+                attendees: [
+                    {
+                        role: "Instructor",
+                        experience: "Professional photographer with 10 years experience",
+                        teachingStyle: "Patient and encouraging",
+                        personality: "Friendly and approachable"
+                    },
+                    {
+                        role: "Participant",
+                        averageAge: 28,
+                        commonInterests: ["photography", "art", "nature"],
+                        typicalPersonality: "Creative and enthusiastic"
+                    }
+                ],
+                eventAtmosphere: "Casual and supportive learning environment"
+            },
+            {
+                id: "event002",
+                name: "Intimate Italian Cooking Class",
+                type: "Cooking",
+                cuisine: "Italian",
+                time: { day: "Wednesday", startTime: "19:00", endTime: "21:30" },
+                location: "Little Italy, New York City",
+                socialLevel: "Small group (4-6 people)",
+                description: "Learn to make authentic pasta and tiramisu in a cozy setting.",
+                tags: ["hands-on", "culinary", "social", "cooking", "food"],
+                skillLevel: "beginner",
+                pacing: "structured",
+                interactionLevel: "high",
+                environmentType: "indoor",
+                attendees: [
+                    {
+                        role: "Chef Instructor",
+                        experience: "Experienced chef specializing in Italian cuisine",
+                        teachingStyle: "Engaging and hands-on",
+                        personality: "Passionate and welcoming"
+                    },
+                    {
+                        role: "Participant",
+                        averageAge: 35,
+                        commonInterests: ["cooking", "Italian culture", "food"],
+                        typicalPersonality: "Foodie, social, eager to learn"
+                    }
+                ],
+                eventAtmosphere: "Fun and interactive cooking party atmosphere"
+            },
+            {
+                id: "event003",
+                name: "Mindful Yoga in the Park",
+                type: "Yoga",
+                cuisine: null,
+                time: { day: "Sunday", startTime: "09:00", endTime: "10:30" },
+                location: "Bryant Park, New York City",
+                socialLevel: "Medium group (10-20 people)",
+                description: "Start your Sunday with a relaxing yoga session surrounded by nature.",
+                tags: ["wellness", "outdoors", "beginner-friendly", "yoga", "mindfulness"],
+                skillLevel: "all-levels",
+                pacing: "gentle",
+                interactionLevel: "low",
+                environmentType: "outdoor",
+                attendees: [
+                    {
+                        role: "Yoga Instructor",
+                        experience: "Certified yoga instructor with 5+ years experience",
+                        teachingStyle: "Calm and guiding",
+                        personality: "Peaceful and encouraging"
+                    },
+                    {
+                        role: "Participant",
+                        averageAge: 30,
+                        commonInterests: ["yoga", "meditation", "wellness", "nature"],
+                        typicalPersonality: "Health-conscious, seeking relaxation and mindfulness"
+                    }
+                ],
+                eventAtmosphere: "Serene and peaceful"
+            }
+        ];
+        
+        async function generatePrompt(userProfile, events) {
+            return `As an AI event matching expert, analyze this user profile and events to find ideal matches.
+            Consider these comprehensive matching factors:
+        
+            1. INTEREST ALIGNMENT
+            - Direct interest matches
+            - Related or complementary interests
+            - Skill level compatibility
+            
+            2. SOCIAL DYNAMICS
+            - User's social style (${userProfile.socialStyle}) vs event atmosphere
+            - Group size preferences
+            - Interaction level comfort
+            
+            3. PERSONAL GROWTH
+            - Alignment with user's stated goals
+            - Learning opportunities
+            - Skill development potential
+            
+            4. ENVIRONMENTAL FIT
+            - Location compatibility
+            - Time/schedule alignment
+            - Setting preferences (indoor/outdoor)
+            
+            5. COMMUNITY MATCH
+            - Attendee profile compatibility
+            - Age group alignment
+            - Shared interests with typical participants
+        
+            USER PROFILE:
+            ${JSON.stringify(userProfile, null, 2)}
+        
+            EVENTS:
+            ${JSON.stringify(events, null, 2)}
+        
+            For each event, provide:
+            1. Overall match score (0-100)
+            2. Detailed explanation of match factors
+            3. Key matching categories scores:
+               - Interest Match (0-100)
+               - Social Fit (0-100)
+               - Goal Alignment (0-100)
+               - Practical Fit (0-100)
+               - Community Match (0-100)
+            4. Specific recommendations or considerations
+        
+            Response format:
+            {
+                "matches": [
+                    {
+                        "eventId": "string",
+                        "overallScore": number,
+                        "categoryScores": {
+                            "interestMatch": number,
+                            "socialFit": number,
+                            "goalAlignment": number,
+                            "practicalFit": number,
+                            "communityMatch": number
+                        },
+                        "explanation": "string",
+                        "recommendations": "string"
+                    }
+                ]
+            }`;
+        }
+        
+        async function matchEventsUsingGemini(userProfile, events) {
+            const apiKey = 'AIzaSyDm4_MxyCOzycokC2LHuqE9fUeIn-3fL6E';  // Replace with your actual API key
+            const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
+            try {
+                const prompt = await generatePrompt(userProfile, events);
+
+                const response = await fetch(`${apiUrl}?key=${apiKey}`, { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status},  Response: ${await response.text()}`);
+                }
+
+                const data = await response.json();
+
+                // Extract the response text 
+                const generatedText = data.candidates[0].content.parts[0].text;
+
+                try {
+                    const parsedResponse = JSON.parse(generatedText);
+                    console.log("Gemini API Response:", parsedResponse);
+                    return parsedResponse.matches;
+                } catch (error) {
+                    console.error("Error parsing Gemini response:", error, "Raw response:", generatedText);
+                    throw new Error("Invalid response format from Gemini API");
+                }
+
+            } catch (error) {
+                console.error("Error with Gemini API:", error);
+                throw error;
+            }
+        }
+        function displayMatchedEvents(matchedEvents) {
+            const resultsDiv = document.getElementById('eventResults');
+            resultsDiv.innerHTML = '<h2>Recommended Events</h2>';
+        
+            matchedEvents.sort((a, b) => b.overallScore - a.overallScore);
+        
+            matchedEvents.forEach(match => {
+                const event = events.find(e => e.id === match.eventId);
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event-item');
+        
+                const scoreClass = match.overallScore >= 80 ? 'high' :
+                    match.overallScore >= 60 ? 'medium' : 'low';
+        
+                // Create radar chart data for category scores
+                const categoryScores = match.categoryScores;
+                
+                eventDiv.innerHTML = `
+                    <div class="match-score ${scoreClass}">
+                        Overall Match: ${match.overallScore}%
+                    </div>
+                    <h3>${event.name}</h3>
+                    <div class="score-breakdown">
+                        <p><strong>Match Breakdown:</strong></p>
+                        <ul>
+                            <li>Interest Match: ${categoryScores.interestMatch}%</li>
+                            <li>Social Fit: ${categoryScores.socialFit}%</li>
+                            <li>Goal Alignment: ${categoryScores.goalAlignment}%</li>
+                            <li>Practical Fit: ${categoryScores.practicalFit}%</li>
+                            <li>Community Match: ${categoryScores.communityMatch}%</li>
+                        </ul>
+                    </div>
+                    <p><strong>When:</strong> ${event.time.day} ${event.time.startTime} - ${event.time.endTime}</p>
+                    <p><strong>Where:</strong> ${event.location}</p>
+                    <p><strong>Group Size:</strong> ${event.socialLevel}</p>
+                    <p><strong>Description:</strong> ${event.description}</p>
+                    <p><strong>Why this matches you:</strong> ${match.explanation}</p>
+                    <p><strong>Recommendations:</strong> ${match.recommendations}</p>
+                    <div class="tags-container">
+                        ${event.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <button class="join-button" onclick="joinEvent('${event.id}')">Join Event</button>
+                `;
+                resultsDiv.appendChild(eventDiv);
+            });
+        }
+        
+        function joinEvent(eventId) {
+            const event = events.find(e => e.id === eventId);
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+            `;
+            modal.innerHTML = `
+                <h3>Event Joined Successfully!</h3>
+                <p>You've registered for: ${event.name}</p>
+                <p>When: ${event.time.day} at ${event.time.startTime}</p>
+                <p>Where: ${event.location}</p>
+                <button onclick="this.parentElement.remove()" style="
+                    background: #1a237e;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                ">Close</button>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function validateProfile(profile) {
+            const requiredFields = ['name', 'age', 'location'];
+            const errors = [];
+        
+            requiredFields.forEach(field => {
+                if (!profile[field]) {
+                    errors.push(`${field.charAt(0).toUpperCase() + field.slice(1)} is required`);
+                }
+            });
+        
+            if (profile.age < 18 || profile.age > 120) {
+                errors.push('Age must be between 18 and 120');
+            }
+        
+            return errors;
+        }
+        
+        function showLoadingState() {
+            const resultsDiv = document.getElementById('eventResults');
+            resultsDiv.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Analyzing your profile and finding perfect matches...</p>
+                </div>
+            `;
+        }
+        
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const form = document.getElementById('userProfileForm');
+            
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+        
+                const userProfile = {
+                    name: document.getElementById('name').value,
+                    age: parseInt(document.getElementById('age').value),
+                    location: document.getElementById('location').value,
+                    cuisinePreferences: document.getElementById('cuisinePreferences').value
+                        .split(',').map(c => c.trim()).filter(c => c),
+                    interests: document.getElementById('interests').value
+                        .split(',').map(i => i.trim()).filter(i => i),
+                    socialStyle: document.getElementById('socialStyle').value,
+                    freeTime: document.getElementById('freeTime').value
+                        .split(',').map(t => t.trim()).filter(t => t),
+                    personalityTraits: document.getElementById('personalityTraits').value
+                        .split(',').map(t => t.trim()).filter(t => t),
+                    goals: document.getElementById('goals').value
+                        .split('\n').map(g => g.trim()).filter(g => g)
+                };
+        
+                const errors = validateProfile(userProfile);
+                if (errors.length > 0) {
+                    alert('Please correct the following errors:\n' + errors.join('\n'));
+                    return;
+                }
+        
+                showLoadingState();
+        
+                try {
+                    const matchedEvents = await matchEventsUsingGemini(userProfile, events);
+                    displayMatchedEvents(matchedEvents);
+                } catch (error) {
+                    console.error('Error matching events:', error);
+                    document.getElementById('eventResults').innerHTML = `
+                        <div style="color: #c62828; padding: 20px; text-align: center;">
+                            <h3>Oops! Something went wrong</h3>
+                            <p>We encountered an error while matching events. Please try again later.</p>
+                            <p>Error details: ${error.message}</p>
+                        </div>`;
+                }
+            });
+        });
+            </script>
+</body>
+</html>
