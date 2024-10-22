@@ -125,6 +125,4 @@ Despite these challenges, I pushed through to develop **NicoSocial**. It's not p
 - Enhancing the event recommendations with more AI models and better user experience.
 - Adding media and social features, like sharing events or photos.
   
-## License
 
-This project is licensed under the MIT License.
