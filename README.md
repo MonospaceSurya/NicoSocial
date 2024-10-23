@@ -78,15 +78,9 @@ video: https://drive.google.com/file/d/1CipPKYFsTLHLiHmye-UZ9Z67ePhqky8p/view?us
 Below are screenshots from the **NicoSocial** app showcasing key features:
 
   <p align="center">
-    <img src="app_screenshots/discover.png" alt="Discover Page" width="300px">
-      <img src="app_screenshots/calendar1.png" alt="Event Calendar" width="300px">
-    <img src="app_screenshots/event.png" alt="Event Details" width="300px">
+    <img src="app_screenshots/gallery.png" alt="Discover Page" width="1000px">
   </p>
-   <p align="center">
-    <img src="app_screenshots/map.png" alt="Event Map" width="300px">
-   <img src="app_screenshots/profile.png" alt="User Profile" width="300px">
-       <img src="app_screenshots/event2.png" alt="Full Calendar" width="300px">
-  </p>
+
   
 - **Discover Page**: A list of personalized events recommended for the user.
 
