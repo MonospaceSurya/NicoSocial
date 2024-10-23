@@ -3,13 +3,15 @@
 
 [Project Demo Video](https://github.com/user-attachments/assets/d36af9d0-ca59-4abd-8eb3-ef7b52dcafa8)
 
+🔊 turn on volume :)
+
 **NicoSocial** is a social platform designed to make socializing easier, fun, and rewarding by encouraging participation in personalized activities. It connects users through common interests and helps them overcome the initial hurdles of socializing by intelligently recommending events and activities that suit their preferences and social strengths.
 
 The app aims to combat loneliness and improve social interactions using technology, leveraging AI to suggest tailored events and create meaningful connections. 
 
-video: https://drive.google.com/file/d/189nX4sPbv6ksW8MaWGtigZjvtzH0ov17/view?usp=sharing
+video 🎥: https://drive.google.com/file/d/189nX4sPbv6ksW8MaWGtigZjvtzH0ov17/view?usp=sharing
 
-## Core Features
+## #️⃣ Core Features
 
 ### 1. **Profiling**
    - Users answer a series of questions to build a social profile. This includes:
@@ -60,7 +62,7 @@ The FastAPI backend is integrated to provide event similarity scoring, using AI 
   <p align="center">
   <img src="fastapi.png" alt="W2W">
 </p> 
-   video: https://drive.google.com/file/d/1KM_aK7JpsRAc-KzHxPz0866p7gqFmUAX/view?usp=sharing
+   video 🎥: https://drive.google.com/file/d/1KM_aK7JpsRAc-KzHxPz0866p7gqFmUAX/view?usp=sharing
 
 - HTML Demo: A simple web form demonstrating how event matchmaking works using Cosine Similarity and the Gemini API.
 <p align="center">
@@ -68,7 +70,7 @@ The FastAPI backend is integrated to provide event similarity scoring, using AI 
    <img src="app_screenshots/recommended_events.png" alt="W2W">
 </p> 
 
-video: https://drive.google.com/file/d/1CipPKYFsTLHLiHmye-UZ9Z67ePhqky8p/view?usp=sharing
+video 🎥: https://drive.google.com/file/d/1CipPKYFsTLHLiHmye-UZ9Z67ePhqky8p/view?usp=sharing
 
 
 ---
