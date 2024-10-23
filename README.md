@@ -1,5 +1,5 @@
 
-# NicoSocial
+# 🌍 NicoSocial
 
 [Project Demo Video](https://github.com/user-attachments/assets/d36af9d0-ca59-4abd-8eb3-ef7b52dcafa8)
 
@@ -30,7 +30,7 @@ video 🎥: https://drive.google.com/file/d/189nX4sPbv6ksW8MaWGtigZjvtzH0ov17/vi
 ### 3. **Connections**
    - Users can add friends on the platform and engage in group activities. The app helps in planning these activities, ensuring they align with everyone’s preferences.
 
-## Addressing Social Challenges
+## 😔 Addressing Social Challenges
 
 Ever felt lonely at home, unsure how to join social activities? Or watched your friends on social media having fun and wondered how they organize these events? **NicoSocial** helps solve these problems by:
 - **Breaking the Ice**: It helps users overcome the hardest part of socializing—initiating conversations and events. AI and algorithms facilitate this by suggesting ways to interact and get involved.
@@ -38,7 +38,7 @@ Ever felt lonely at home, unsure how to join social activities? Or watched your 
   
 Technology often gets a bad reputation for making people less social. **NicoSocial** turns that idea around by using tech to help people connect, interact, and make meaningful friendships.
 
-## AI and Event Matchmaking
+## ✨ AI and Event Matchmaking
 
 The app’s event recommendation system is powered by AI, with algorithms working to find the best-suited events for each user. Here’s how it works:
 - **Cosine Similarity**: We calculate the similarity between users' profiles and event attributes to recommend the most relevant activities.
@@ -46,7 +46,7 @@ The app’s event recommendation system is powered by AI, with algorithms workin
   
 I built a demo using HTML to show how the matchmaking works. The demo takes a user’s form input and compares it to a list of sample events, giving each event a score based on how well it matches the user’s preferences. The FastAPI backend handles the similarity calculations and serves these recommendations to the app.
 
-## Current Implementation
+## 🌐 Current Implementation
 
 Due to time constraints, here’s the current state of the app:
 
@@ -56,7 +56,7 @@ Due to time constraints, here’s the current state of the app:
   
 The FastAPI backend is integrated to provide event similarity scoring, using AI to help find the most suitable events for each user.
 
-## Screenshots & Demo
+## 🎬 Screenshots & Demo
 
 - **FastAPI**: Backend server handling similarity logic and event matchmaking.
   <p align="center">
@@ -76,7 +76,7 @@ video 🎥: https://drive.google.com/file/d/1CipPKYFsTLHLiHmye-UZ9Z67ePhqky8p/vi
 ---
 
 
-## App Screenshots
+## 📱 App Screenshots
 Below are screenshots from the **NicoSocial** app showcasing key features:
 
   <p align="center">
@@ -99,7 +99,7 @@ Below are screenshots from the **NicoSocial** app showcasing key features:
 - **Full Calendar View**: A broader view of the calendar showing events across multiple dates.
 
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Frontend**:
   - **Swift**: For iOS app development.
@@ -140,7 +140,7 @@ Below are screenshots from the **NicoSocial** app showcasing key features:
    - Ensure the FastAPI server is running to provide event matchmaking API services.
    - For the HTML demo, open `index.html` in a browser to test the event matchmaking proof of concept.
   
-## Challenges Faced
+## 🧗🏻 Challenges Faced
 
 Developing **NicoSocial** involved overcoming several major hurdles:
 
@@ -152,7 +152,7 @@ Developing **NicoSocial** involved overcoming several major hurdles:
 
 Despite these challenges, I pushed through to develop **NicoSocial**. It's not perfect, but it's the best I could achieve under the circumstances.
 
-## Future Improvements
+## 🌈 Future Improvements
 
 - Full integration of the matchmaking logic in the Swift app.
 - Enhancing the event recommendations with more AI models and better user experience.
