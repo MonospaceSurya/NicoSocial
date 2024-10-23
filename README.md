@@ -1,11 +1,13 @@
 
 # NicoSocial
 
-[Project Demo Video](https://github.com/user-attachments/assets/ea0c4e57-67ff-4114-8adb-49750e199533)
+[Project Demo Video](https://github.com/user-attachments/assets/d36af9d0-ca59-4abd-8eb3-ef7b52dcafa8)
 
 **NicoSocial** is a social platform designed to make socializing easier, fun, and rewarding by encouraging participation in personalized activities. It connects users through common interests and helps them overcome the initial hurdles of socializing by intelligently recommending events and activities that suit their preferences and social strengths.
 
 The app aims to combat loneliness and improve social interactions using technology, leveraging AI to suggest tailored events and create meaningful connections. 
+
+video: https://drive.google.com/file/d/189nX4sPbv6ksW8MaWGtigZjvtzH0ov17/view?usp=sharing
 
 ## Core Features
 
@@ -63,10 +65,43 @@ The FastAPI backend is integrated to provide event similarity scoring, using AI 
 - HTML Demo: A simple web form demonstrating how event matchmaking works using Cosine Similarity and the Gemini API.
 <p align="center">
   <img src="web.png" alt="W2W">
+   <img src="app_screenshots/recommended_events.png" alt="W2W">
 </p> 
+
 video: https://drive.google.com/file/d/1CipPKYFsTLHLiHmye-UZ9Z67ePhqky8p/view?usp=sharing
 
-- Swift App: Screenshots of the iOS app showing the event map, calendar, and full events page.
+
+---
+
+
+## App Screenshots
+Below are screenshots from the **NicoSocial** app showcasing key features:
+
+  <p align="center">
+    <img src="app_screenshots/discover.png" alt="Discover Page" width="300px">
+      <img src="app_screenshots/calendar1.png" alt="Event Calendar" width="300px">
+    <img src="app_screenshots/event.png" alt="Event Details" width="300px">
+  </p>
+   <p align="center">
+    <img src="app_screenshots/map.png" alt="Event Map" width="300px">
+   <img src="app_screenshots/profile.png" alt="User Profile" width="300px">
+       <img src="app_screenshots/event2.png" alt="Full Calendar" width="300px">
+  </p>
+  
+- **Discover Page**: A list of personalized events recommended for the user.
+
+- **Event Calendar**: View upcoming events in a calendar format, making it easy to schedule activities.
+
+- **Event Details**: Detailed view of an event, showing participants and rewards for joining.
+
+
+- **Event Map**: A map view displaying ongoing events nearby with clickable pins for details.
+
+
+- **User Profile**: View and edit user information, social preferences, and interests to improve event recommendations.
+
+- **Full Calendar View**: A broader view of the calendar showing events across multiple dates.
+
 
 ## Tech Stack
 
